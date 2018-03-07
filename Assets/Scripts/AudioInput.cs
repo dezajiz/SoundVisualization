@@ -35,7 +35,7 @@ public class AudioInput : MonoBehaviour {
 
 		var freq = maxIndex * AudioSettings.outputSampleRate / 2 / spectrum.Length;
 
-		if (currentMax < freq && freq > 500) {
+		if (freq > 0) {
 			currentMax = freq;
 			setScale(freq);
 		}
@@ -44,7 +44,7 @@ public class AudioInput : MonoBehaviour {
 	private void setScale(float req) {
 		float scale = req * 0.001f;
 		_model.transform.localScale = new Vector3(scale, scale, scale);
-		_model.transform.DOScale(new Vector3(1,1,1), 1).OnComplete(onEndReset);
+		// _model.transform.DOScale(new Vector3(1,1,1), 1).OnComplete(onEndReset);
 	}
 
 	private void onEndReset() {
