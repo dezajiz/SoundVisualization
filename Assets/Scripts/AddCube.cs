@@ -9,10 +9,10 @@ public class AddCube : MonoBehaviour {
 
 	float rotateY = 0;
 	float RADIAN = Mathf.PI / 180;
-	public float radius = 100;
 
 	void Start () {
 		for (int i = 0; i < CubeNum; i++) {
+			float radius = Random.Range(0.0f, 100);
 			float rad = Random.Range(0, 360) * RADIAN;
 			float rad2 = Random.Range(0, 360) * RADIAN;
 
