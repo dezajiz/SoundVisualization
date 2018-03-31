@@ -35,7 +35,7 @@ public class Cube : MonoBehaviour {
 		for (int x = 0; x < _x; x++) {
 			for (int y = 0; y < _y; y++) {
 				for (int z = 0; z < _z; z++) {
-					cubePositions[x * _x * 2 + y * _y + z] = new Vector3(x,y,z);
+					cubePositions[x * _y * _z + y * _z + z] = new Vector3(x,y,z);
 				}
 			}
 		}
