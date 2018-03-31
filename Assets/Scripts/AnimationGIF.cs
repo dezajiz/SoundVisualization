@@ -23,7 +23,7 @@ public class AnimationGIF : MonoBehaviour {
         if (changeFrameSecond < dTime) {
             dTime = 0.0f;
             firstFrameNum++;
-            if(firstFrameNum > imageLength) firstFrameNum = 0;
+            if(firstFrameNum > imageLength - 1) firstFrameNum = 0;
         }
         Texture tex = Resources.Load(folderName + "/" + headText + firstFrameNum) as Texture;
         material.SetTexture ("_MainTex", tex);

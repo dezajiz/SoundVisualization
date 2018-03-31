@@ -35,7 +35,7 @@ public class Cube : MonoBehaviour {
 		for (int x = 0; x < _x; x++) {
 			for (int y = 0; y < _y; y++) {
 				for (int z = 0; z < _z; z++) {
-					cubePositions[x * _y * _z + y * _z + z] = new Vector3(x,y,z);
+					cubePositions[x * _y * _z + y * _z + z] = new Vector3(x - _x * .5f,y - _y * .5f,z - _z*0.5f);
 				}
 			}
 		}
@@ -53,7 +53,7 @@ public class Cube : MonoBehaviour {
 	void Move () {
 		for (int i = 0; i < CubeNum; i++) {
 			Transform child = transform.GetChild(i);
-			child.transform.DOMove(cubePositions[i], 0.3f);
+			child.transform.DOMove(cubePositions[i], 2.0f).SetEase(Ease.InOutCirc);
 		}
 	}
 }

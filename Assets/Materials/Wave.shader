@@ -20,7 +20,9 @@
         {
             UNITY_INITIALIZE_OUTPUT(Input, o);
             float amp = 0.5 * sin(_Time * 100 + v.vertex.x * 100) * 100;
-            v.vertex.xyz = float3(v.vertex.x, v.vertex.y+amp, v.vertex.z);            
+            fixed3 pos = v.vertex;
+            pos += v.normal * amp * 0.1;
+            v.vertex.xyz = pos;
         }
 
         void surf (Input IN, inout SurfaceOutput o) {
