@@ -16,7 +16,10 @@ public class CustomPlane : MonoBehaviour
     void Start()
     {
         MeshFilter meshFilter;
-        meshFilter = gameObject.AddComponent<MeshFilter>();
+        meshFilter = gameObject.GetComponent<MeshFilter>();
+        if (meshFilter == null) {
+            meshFilter = gameObject.AddComponent<MeshFilter>();
+        }
         if (meshFilter == null) return;
         Mesh mesh  = CreateCustomPlane(cols, rows, width, height);
         meshFilter.mesh = mesh;

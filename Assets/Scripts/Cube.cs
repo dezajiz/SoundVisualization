@@ -11,9 +11,12 @@ public class Cube : MonoBehaviour {
 	public int _z;
 	float rotateY = 0;
 	float RADIAN = Mathf.PI / 180;
-	Vector3[] cubePositions;
+	Vector3[] cubePosition0;
+	Vector3[] cubePositions1;
 
 	void Start () {
+		cubePosition0 = new Vector3[CubeNum];
+
 		for (int i = 0; i < CubeNum; i++) {
 			float radius = Random.Range(0.0f, 100);
 			float rad = Random.Range(0, 360) * RADIAN;
@@ -25,17 +28,19 @@ public class Cube : MonoBehaviour {
 				Mathf.Sin(rad) * (radius)
 			);
 
+			cubePosition0[i] = pos;
+
 			GameObject instance = Instantiate (prefab, pos, Quaternion.identity);
 			instance.transform.parent = gameObject.transform;
 		}
 
-		cubePositions = new Vector3[CubeNum];
+		cubePositions1 = new Vector3[CubeNum];
 		int length = 10;
 
 		for (int x = 0; x < _x; x++) {
 			for (int y = 0; y < _y; y++) {
 				for (int z = 0; z < _z; z++) {
-					cubePositions[x * _y * _z + y * _z + z] = new Vector3(x - _x * .5f,y - _y * .5f,z - _z*0.5f);
+					cubePositions1[x * _y * _z + y * _z + z] = new Vector3(x - _x * .5f,y - _y * .5f,z - _z*0.5f);
 				}
 			}
 		}
@@ -53,7 +58,7 @@ public class Cube : MonoBehaviour {
 	void Move () {
 		for (int i = 0; i < CubeNum; i++) {
 			Transform child = transform.GetChild(i);
-			child.transform.DOMove(cubePositions[i], 2.0f).SetEase(Ease.InOutCirc);
+			child.transform.DOMove(cubePositions1[i], 2.0f).SetEase(Ease.InOutCirc);
 		}
 	}
 }

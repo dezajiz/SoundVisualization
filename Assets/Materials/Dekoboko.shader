@@ -97,8 +97,9 @@
         {
             UNITY_INITIALIZE_OUTPUT(Input, o);
 			float2 position = UnityObjectToClipPos(v.vertex);
+            float3 pos = v.vertex;
             float amp = snoise(v.texcoord * sin(_SinTime) * _Fineness) * _Strength;
-            v.vertex.xyz = float3(v.vertex.x, v.vertex.y + amp, v.vertex.z);
+            v.vertex.xyz = pos + v.normal * amp;
         }
 
         void surf (Input IN, inout SurfaceOutput o) {

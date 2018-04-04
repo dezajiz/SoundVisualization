@@ -8,8 +8,11 @@ public class Rotation : MonoBehaviour {
 	float rotateX;
 	float rotateY;
 	float rotateZ;
-	private Tweener tween;
+	private Vector3 inititalPos;
+	private Tweener tweenMove;
+	private Tweener tweenScale;
 	private float threshold;
+	private int scene = 0;
 	
 	void Start () {
 		rotateX = Random.Range(1, 360);
@@ -19,19 +22,40 @@ public class Rotation : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		gameObject.transform.rotation = Quaternion.Euler(rotateX, rotateY, rotateZ);
-		rotateX += 2;
-		rotateY += 2;
-		rotateZ += 2;
+
+		if (scene == 0) {
+			gameObject.transform.rotation = Quaternion.Euler(rotateX, rotateY, rotateZ);
+			rotateX += 2;
+			rotateY += 2;
+			rotateZ += 2;
+		}
 
 		if (Input.GetKey(KeyCode.Space)) {
-			if (tween != null) {
-				tween.Kill();
+			if (scene == 0) {
+
+			} else if (scene == 1) {
+
 			}
 
-			int scale = Mathf.FloorToInt(Random.Range(1, 5));
+			if (tweenScale != null) {
+				tweenScale.Kill();
+			}
+
+			int scale = Mathf.FloorToInt(Random.Range(0.5f, 1.0f));
 			transform.localScale = new Vector3(scale, scale, scale);
-			tween = transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 0.3f);
+
+			// 位置とスケールを戻す
+			tweenScale = transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 0.3f);
+		} else if (Input.GetKey(KeyCode.M)) {
+			scene++;
+			if (scene == 1) {
+				Move();
+			}
 		}
+	}
+
+	void Move () {
+		// transform.DOScale(new Vector3(1.0f, 1.0f, 1.0f), 2.0f).SetEase(Ease.InOutCirc);
+		transform.DORotate(new Vector3(0.0f, 0.0f, 0.0f), 2.0f).SetEase(Ease.InOutCirc);
 	}
 }
